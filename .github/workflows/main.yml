@@ -1,0 +1,27 @@
+name: mysql
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy_clone-mysql:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          docker login -u=sample-mysql-operator+robot -p=${{ secrets.QUAY_PASSWORD }} quay.io
+          (cd clone-mysql && ./build.sh)
+  deploy_init-mysql:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          docker login -u=sample-mysql-operator+robot -p=${{ secrets.QUAY_PASSWORD }} quay.io
+          (cd init-mysql && ./build.sh)
+  deploy_xtrabackup:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          docker login -u=sample-mysql-operator+robot -p=${{ secrets.QUAY_PASSWORD }} quay.io
+          (cd xtrabackup && ./build.sh)
