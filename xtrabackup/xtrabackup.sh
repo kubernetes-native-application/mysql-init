@@ -24,7 +24,7 @@ if [[ -f change_master_to.sql.in ]]; then
   echo "Initializing replication from clone position"
   mysql -h 127.0.0.1 \
         -e "$(<change_master_to.sql.in), \
-      MASTER_HOST='mysql-0.mysql', \
+      MASTER_HOST='mysql-0.mysql-sample', \
       MASTER_USER='root', \
       MASTER_PASSWORD='', \
       MASTER_CONNECT_RETRY=10; \
