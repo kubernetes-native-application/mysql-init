@@ -6,6 +6,6 @@ set -ex
 ordinal=${BASH_REMATCH[1]}
 [[ $ordinal -eq 0 ]] && exit 0
 # Clone data from previous peer.
-ncat --recv-only mysql-$(($ordinal-1)).mysql-sample 3307 | xbstream -x -C /var/lib/mysql
+ncat --recv-only $POD_NAME-$(($ordinal-1)).$SVC_NAME 3307 | xbstream -x -C /var/lib/mysql
 # Prepare the backup.
 xtrabackup --prepare --target-dir=/var/lib/mysql
